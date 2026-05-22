@@ -1,0 +1,18 @@
+{
+  "name": "081a-user-node-llm",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/home/chris/\\.nvm/versions/node/v[0-9.]+/bin/node$" },
+      { "type": "regexp", "operand": "process.command",
+        "data": "(^| )/home/chris/src/" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/llm-domains.txt" }
+    ]
+  }
+}

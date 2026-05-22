@@ -1,0 +1,5 @@
+registry.npmjs.org
+nodejs.org
+nodejs.dev
+registry.yarnpkg.com
+yarnpkg.com

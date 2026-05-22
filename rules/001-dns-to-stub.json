@@ -1,0 +1,14 @@
+{
+  "name": "001-dns-to-stub",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "simple", "operand": "dest.ip",   "data": "127.0.0.53" },
+      { "type": "simple", "operand": "dest.port", "data": "53" }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "011-system-snapd",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "simple", "operand": "process.path", "data": "/usr/lib/snapd/snapd" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/system-domains.txt" }
+    ]
+  }
+}

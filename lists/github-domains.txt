@@ -1,0 +1,9 @@
+github.com
+api.github.com
+codeload.github.com
+objects.githubusercontent.com
+raw.githubusercontent.com
+gist.githubusercontent.com
+uploads.github.com
+ghcr.io
+pkg-containers.githubusercontent.com

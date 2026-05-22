@@ -1,0 +1,18 @@
+{
+  "name": "081b-user-node-aws",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/home/chris/\\.nvm/versions/node/v[0-9.]+/bin/node$" },
+      { "type": "regexp", "operand": "process.command",
+        "data": "(^| )/home/chris/src/" },
+      { "type": "regexp", "operand": "dest.host",
+        "data": "^([a-z0-9-]+\\.)?(s3|sts|iam|ec2|lambda|dynamodb|sqs|sns|logs|secretsmanager|ssm|kms|cloudwatch|cloudformation|ecr|ecs|eks)([.-][a-z0-9-]+)?\\.amazonaws\\.com$" }
+    ]
+  }
+}

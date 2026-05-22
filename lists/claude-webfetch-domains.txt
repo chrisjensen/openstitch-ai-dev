@@ -1,0 +1,13 @@
+docs.anthropic.com
+developer.mozilla.org
+nodejs.org
+262.ecma-international.org
+mupdf.readthedocs.io
+pymupdf.readthedocs.io
+mupdfjs.readthedocs.io
+camelot-py.readthedocs.io
+mupdf.com
+artifex.com
+github.com
+api.github.com
+raw.githubusercontent.com

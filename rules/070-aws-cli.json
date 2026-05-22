@@ -1,0 +1,16 @@
+{
+  "name": "070-aws-cli",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/usr/local/aws-cli/v2/[0-9.]+/dist/aws$" },
+      { "type": "regexp", "operand": "dest.host",
+        "data": "^([a-z0-9-]+\\.)?(s3|sts|iam|ec2|lambda|dynamodb|sqs|sns|logs|secretsmanager|ssm|kms|cloudwatch|cloudformation|ecr|ecs|eks)([.-][a-z0-9-]+)?\\.amazonaws\\.com$" }
+    ]
+  }
+}

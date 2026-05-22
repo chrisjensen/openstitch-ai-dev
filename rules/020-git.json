@@ -1,0 +1,16 @@
+{
+  "name": "020-git",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^(/usr/bin/git|/usr/lib/git-core/git-remote-https?)$" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/github-domains.txt" }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+archive.ubuntu.com
+security.ubuntu.com
+esm.ubuntu.com
+ports.ubuntu.com
+changelogs.ubuntu.com
+keyserver.ubuntu.com
+api.snapcraft.io
+dashboard.snapcraft.io
+login.ubuntu.com
+pool.ntp.org
+ntp.ubuntu.com

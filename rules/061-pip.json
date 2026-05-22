@@ -1,0 +1,18 @@
+{
+  "name": "061-pip",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/usr/bin/python3(\\.[0-9]+)?$" },
+      { "type": "regexp", "operand": "process.command",
+        "data": "(-m pip|/pip[0-9.]*$)" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/pypi-domains.txt" }
+    ]
+  }
+}

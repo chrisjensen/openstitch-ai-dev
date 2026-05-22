@@ -1,0 +1,6 @@
+api.anthropic.com
+statsig.anthropic.com
+api.openai.com
+generativelanguage.googleapis.com
+aiplatform.googleapis.com
+oauth2.googleapis.com

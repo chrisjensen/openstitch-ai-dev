@@ -1,0 +1,16 @@
+{
+  "name": "050-cargo",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "simple", "operand": "process.path",
+        "data": "/home/chris/.cargo/bin/rustup" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/cargo-domains.txt" }
+    ]
+  }
+}

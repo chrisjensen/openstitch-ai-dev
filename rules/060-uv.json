@@ -1,0 +1,16 @@
+{
+  "name": "060-uv",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "simple", "operand": "process.path",
+        "data": "/home/chris/.local/bin/uv" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/pypi-domains.txt" }
+    ]
+  }
+}

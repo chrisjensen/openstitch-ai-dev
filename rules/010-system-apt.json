@@ -1,0 +1,16 @@
+{
+  "name": "010-system-apt",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/usr/(bin|lib/apt/methods)/(apt|apt-get|apt-cache|http|https|gpgv|unattended-upgrade)$" },
+      { "type": "lists",  "operand": "lists.domains",
+        "data": "/etc/opensnitchd/lists/system-domains.txt" }
+    ]
+  }
+}

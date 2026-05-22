@@ -1,0 +1,16 @@
+{
+  "name": "090-docker-daemon",
+  "enabled": true,
+  "action": "allow",
+  "duration": "always",
+  "operator": {
+    "type": "list",
+    "operand": "list",
+    "list": [
+      { "type": "regexp", "operand": "process.path",
+        "data": "^/usr/bin/(dockerd|containerd|docker)$" },
+      { "type": "regexp", "operand": "dest.host",
+        "data": "^(.*\\.docker\\.(com|io)|ghcr\\.io|.*\\.githubusercontent\\.com|production\\.cloudflare\\.docker\\.com)$" }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+crates.io
+index.crates.io
+static.crates.io
+static.rust-lang.org
+forge.rust-lang.org
+sh.rustup.rs
