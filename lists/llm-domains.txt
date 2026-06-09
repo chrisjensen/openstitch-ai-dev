@@ -1,6 +1,14 @@
-api.anthropic.com
-statsig.anthropic.com
-api.openai.com
-generativelanguage.googleapis.com
-aiplatform.googleapis.com
-oauth2.googleapis.com
+# Anthropic Claude
+#api.anthropic.com
+#statsig.anthropic.com
+
+# OpenAI (ChatGPT, API)
+#api.openai.com
+
+# Google Gemini / Vertex AI
+#generativelanguage.googleapis.com
+#aiplatform.googleapis.com
+#oauth2.googleapis.com
+
+# Other AI services
+#z.ai
