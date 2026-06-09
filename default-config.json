@@ -4,7 +4,7 @@
     "LogFile": "/var/log/opensnitchd.log",
     "Authentication": { "Type": "simple" }
   },
-  "DefaultAction": "deny",
+  "DefaultAction": "reject",
   "DefaultDuration": "always",
   "InterceptUnknown": false,
   "ProcMonitorMethod": "proc",
