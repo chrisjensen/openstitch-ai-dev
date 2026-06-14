@@ -1,12 +1,11 @@
 {
-  "name": "000-loopback",
+  "name": "999-observe-default",
   "enabled": true,
   "action": "allow",
   "duration": "always",
-  "precedence": true,
   "operator": {
     "type": "regexp",
     "operand": "dest.ip",
-    "data": "^(127\\.|::1$)"
+    "data": "."
   }
 }
