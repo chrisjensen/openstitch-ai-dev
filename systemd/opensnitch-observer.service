@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenSnitch observer UI — logs connections that match no rule
+After=opensnitch.service
+Wants=opensnitch.service
+# This process binds the OpenSnitch UI socket (Server.Address in
+# default-config.json, default unix:///tmp/osui.sock). Only one UI can hold it,
+# so do NOT run the Qt opensnitch-ui (or ostui) at the same time.
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/opensnitch-observer --log /var/log/opensnitch-observer.log
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
