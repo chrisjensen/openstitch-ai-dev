@@ -3,7 +3,6 @@
   "enabled": true,
   "action": "allow",
   "duration": "always",
-  "precedence": true,
   "operator": {
     "type": "regexp",
     "operand": "dest.ip",
