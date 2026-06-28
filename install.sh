@@ -3,7 +3,8 @@
 # Install opensnitch rules and lists into /etc/opensnitchd/.
 # By default only fills in missing files (existing copies are left alone).
 #   --force    overwrite existing files that differ from the repo copy
-#   --diff     preview what would change without writing anything (no root)
+#   --dry-run  list which files would change without writing anything (no root)
+#   --diff     like --dry-run, but also print the diff for each changed file
 #   --service  also install observer.py as a systemd service that logs
 #              connections matching no rule (continuous deny log)
 # See diff.sh for a convenience wrapper around --diff.
@@ -19,18 +20,20 @@ UNIT_DEST=/etc/systemd/system/$UNIT_NAME
 
 FORCE=0
 DRYRUN=0
+DIFF=0
 SERVICE=0
 
 usage() {
   cat <<'EOF'
-usage: install.sh [--force] [--diff] [--service] [--help]
+usage: install.sh [--force] [--dry-run] [--diff] [--service] [--help]
 
   -f, --force      overwrite live files that differ from the repo copy
                    (includes default-config.json — resets any hand-tuned
                    live DefaultAction/DefaultDuration)
-  -n, --dry-run, --diff
-                   show what would change; writes nothing, needs no root.
-                   Combine with --force to preview a forced install.
+  -n, --dry-run    list which files would change; writes nothing, needs no
+                   root. Combine with --force to preview a forced install.
+  -d, --diff       like --dry-run, but also print the diff for each changed
+                   file. Shows diffs whether or not --force is set.
   -s, --service    also install observer.py as a systemd service
                    (opensnitch-observer.service) that runs continuously and
                    logs every connection matching no rule to
@@ -46,7 +49,8 @@ EOF
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -f|--force) FORCE=1 ;;
-    -n|--dry-run|--diff) DRYRUN=1 ;;
+    -n|--dry-run) DRYRUN=1 ;;
+    -d|--diff) DRYRUN=1; DIFF=1 ;;
     -s|--service) SERVICE=1 ;;
     -h|--help) usage; exit 0 ;;
     *) echo "error: unknown argument: $1" >&2; usage >&2; exit 1 ;;
@@ -96,7 +100,7 @@ install_file() {
       updated=$((updated + 1))
       if [[ "$DRYRUN" -eq 1 ]]; then
         printf '  update  %s\n' "$dest"
-        diff -u "$dest" "$src" | sed 's/^/      /' || true
+        [[ "$DIFF" -eq 1 ]] && diff -u "$dest" "$src" | sed 's/^/      /' || true
       else
         install -m "$mode" "$src" "$dest"
         printf '  update  %s\n' "$dest"
@@ -105,6 +109,7 @@ install_file() {
     skip)
       skipped=$((skipped + 1))
       printf '  differs %s (use --force to overwrite)\n' "$dest"
+      [[ "$DIFF" -eq 1 ]] && diff -u "$dest" "$src" | sed 's/^/      /' || true
       ;;
     unchanged)
       unchanged=$((unchanged + 1))
