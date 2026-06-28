@@ -32,7 +32,18 @@ Process-scoped OpenSnitch rules for a headless Linux dev box. Default-deny outbo
    sudo systemctl restart opensnitch
    ```
 
-5. **(Optional) Interactive prompts via [ostui](https://github.com/xlfe/ostui)** — a TUI that replaces the Qt GUI, ideal for headless SSH. Build, run in tmux, and the daemon will route prompts to it for any novel flow:
+5. **(Optional) Continuous deny log via the observer service** — `observer.py` is a
+   minimal headless UI that accepts the daemon's connection, answers each novel
+   flow with the configured default (`DefaultAction`/`DefaultDuration`), and logs
+   it. Install it as a systemd service:
+   ```bash
+   sudo ./install.sh --service
+   tail -f /var/log/opensnitch-observer.log
+   ```
+   This binds the daemon UI socket, so do **not** run the Qt `opensnitch-ui` (or
+   ostui) at the same time — only one UI can hold it.
+
+6. **(Optional) Interactive prompts via [ostui](https://github.com/xlfe/ostui)** — a TUI that replaces the Qt GUI, ideal for headless SSH. Build, run in tmux, and the daemon will route prompts to it for any novel flow:
    ```bash
    git clone https://github.com/xlfe/ostui ~/src/ostui && cd ~/src/ostui && make build
    tmux new -s ostui './ostui --socket unix:///tmp/osui.sock --default-action deny'
@@ -49,13 +60,11 @@ install.sh              # copy-only installer; never overwrites
 
 ## Tuning rules
 
-- **Add a domain to an existing list**: edit `lists/foo-domains.txt`, then replace the live copy. The installer never overwrites, so you must remove the live file first:
-  ```bash
-  sudo rm /etc/opensnitchd/lists/foo-domains.txt && sudo ./install.sh
-  ```
-  Daemon hot-reloads on file change — no restart needed for list edits.
-- **Add a new rule**: drop a new `rules/NNN-name.json`, re-run `sudo ./install.sh`.
-- **Edit an existing rule**: remove the live copy, re-run installer.
+- **Preview before installing**: `./diff.sh` shows what a plain install would create; `./diff.sh --force` shows the content changes a forced install would apply. Read-only, no root needed.
+- **Add a domain to an existing list**: edit `lists/foo-domains.txt`, then `sudo ./install.sh --force` to push the change to the live copy. Daemon hot-reloads on file change — no restart needed for list edits.
+- **Add a new rule**: drop a new `rules/NNN-name.json`, re-run `sudo ./install.sh` (new files are created without `--force`).
+- **Edit an existing rule**: edit it in the repo, then `sudo ./install.sh --force`. Without `--force` the installer only creates missing files and reports existing ones that differ as stale.
+- **Remove a rule**: install never deletes — `sudo rm /etc/opensnitchd/rules/NNN-name.json` and restart.
 - **Find what's being denied**: `journalctl -u opensnitch -f | grep -i deny`.
 
 ## What's covered out of the box
