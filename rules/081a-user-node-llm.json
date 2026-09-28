@@ -10,7 +10,7 @@
       { "type": "regexp", "operand": "process.path",
         "data": "^/home/chris/\\.nvm/versions/node/v[0-9.]+/bin/node$" },
       { "type": "regexp", "operand": "process.command",
-        "data": "(^| )/home/chris/src/" },
+        "data": "(^| )/home/chris/(src/|\\.local/bin/hive-sheet-append\\.mjs)" },
       { "type": "lists",  "operand": "lists.domains",
         "data": "/etc/opensnitchd/lists/llm-domains.txt" }
     ]
